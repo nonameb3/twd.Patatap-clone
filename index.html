@@ -7,14 +7,26 @@
     <link rel="stylesheet" href="assets/css/doc.css">
     <script type="text/javascript" src="assets/js/paper-full.js"></script>
     <script type="text/paperscript" canvas="myCanvas">
+        var cc = [];
+
     	function onKeyDown(event){
     		var setPoint = new Point(view.size.width,view.size.height);
     		var newPoint = setPoint * Point.random();
-    		new Path.Circle(newPoint, 20).fillColor = 'gold';
-
+            var newCircle = new Path.Circle(newPoint, 300);
+            newCircle.fillColor = "gold" ;
+            cc.push(newCircle);
+            console.log(cc);
     	}
         
-        
+        function onFrame(event) {
+            cc.forEach(function(circle){
+                circle.fillColor.hue += 1;
+                circle.scale(.9);
+            })   
+        }
+
+
+       
     </script>
 </head>
 
