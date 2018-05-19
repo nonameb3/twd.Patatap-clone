@@ -6,16 +6,30 @@
     <title>Index</title>
     <link rel="stylesheet" href="assets/css/doc.css">
     <script type="text/javascript" src="assets/js/paper-full.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.12/howler.core.min.js"></script>
     <script type="text/paperscript" canvas="myCanvas">
         var cc = [];
+        var sound1 = new Howl({
+            src: ['sounds/clay.mp3']
+            });
+
+        var sound2 = new Howl({
+            src: ['sounds/moon.mp3']
+            });
 
     	function onKeyDown(event){
+            console.log(event.key);
     		var setPoint = new Point(view.size.width,view.size.height);
     		var newPoint = setPoint * Point.random();
             var newCircle = new Path.Circle(newPoint, 300);
-            newCircle.fillColor = "gold" ;
+            newCircle.fillColor = "gold";
+            
+            if (event.key === "a"){
+                sound1.play();
+                newCircle.fillColor = "blue";
+            }
+            
             cc.push(newCircle);
-            console.log(cc);
     	}
         
         function onFrame(event) {
@@ -23,11 +37,9 @@
                 circle.fillColor.hue += 1;
                 circle.scale(.9);
             })   
-        }
+       }
 
-
-       
-    </script>
+</script>
 </head>
 
 <body>
